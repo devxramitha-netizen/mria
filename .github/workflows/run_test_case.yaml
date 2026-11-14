@@ -30,6 +30,12 @@ jobs:
           # Needed for backward-compatibility test:
           fetch-depth: 0
 
+      - name: Cache APT package archives
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-${{ matrix.builder }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ matrix.os }}-v1
+
       - name: Install prerequisites
         run: |
           apt update
